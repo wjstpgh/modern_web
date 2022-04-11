@@ -200,8 +200,189 @@ cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 1)
 cv2.imwrite('hough.jpg', img)#호프변환이 된 결과이미지 생성
 ```
 
+* result
 
+![image](https://user-images.githubusercontent.com/26988563/162659074-f99aa765-f2fb-4b97-9224-d32594562149.png)
 
+![image](https://user-images.githubusercontent.com/26988563/162659082-beb7ea9c-698c-4cb8-8024-7b11dac2b512.png)
+
+![image](https://user-images.githubusercontent.com/26988563/162659089-63217c1a-25e7-48a2-b5e8-9892159bc059.png)
+
+두 번째와 세 번째의 결과창은 동일한 raw이미지로 변환을 시행했지만 처음 변환을 시도했을 시에 임계점 이상으로 검출되는 엣지가 너무 많이 나와서 임계값을 조절해야 한다. 이렇듯 이미지에 따라 임계값을 조절해주면 원하는 강도만큼의 엣지를 검출하는 것을 조절할 수 있다.
+
+![image](https://user-images.githubusercontent.com/26988563/162659149-36c621eb-f2f6-4570-a086-5a8cc408bb03.png)
+
+위에 작성되었듯이 임계값이 너무 높아 이미지에서 출력할 엣지가 없는 경우에는 아예 결과창이 생성되지 않는다. 위와 같이 엣지가 검출되었을 때에도 임계값을 낮춘다면 더 많은 선들을 볼 수 있다.
+
+* Make code
+
+```
+#define BITMAP_WIDTH 800
+#define BITMAP_HEIGHT 600
+
+#define IMAGE_DIAGONAL sqrtf(BITMAP_WIDTH*BITMAP_WIDTH + BITMAP_HEIGHT*BITMAP_HEIGHT) //대각선의 길이
+
+#define thta 270
+#define line_thrhold 40
+#define thrhold 5
+
+void HoughTransform(LPB* out_Image, LPBYTE* inputImage, int nW, int nH)
+{
+	register int i, j, k, l, m;
+	int d;
+	float p2d = 3.14f / 180.0f;
+
+	int thres = 20;
+
+	for (i = 0;i < IMAGE_DIAGONAL;i++)
+	{
+		for (j = 0;j < thta;j++)
+			H[i][j] = 0;
+	}
+
+	float* LUT_COS = new float[thta];
+	float* LUT_SIN = new float[thta];
+	float* LUT_COT = new float[thta];
+	float* LUT_SEC = new float[thta];
+
+	for (i = 0;i < thta;i++)
+	{
+		LUT_COS[i] = cosf((i)*p2d);
+		LUT_SIN[i] = sinf((i)*p2d);
+		LUT_COT[i] = 1 / tanf(i * p2d);
+		LUT_SEC[i] = 1 / LUT_SIN[i];
+	}
+
+	for (i = 0;i < nH;i++)
+		for (j = 0;j < nW;j++)
+			if (inputImage[i][j] > thrhold)
+			{
+				for (k = 0;k < thta;k++)
+				{
+					d = (int)(i * LUT_COS[k] + j * LUT_SIN[k]);
+
+					if (d >= 0 && d < IMAGE_DIAGONAL)
+						H[d][k] += 1;
+				}
+			}
+}
+ }
+ for (i = 0;i < nH;i++)
+ {
+	 for (j = 0;j < nW;j++)
+		 outImage[i][j] = 0;
+ }
+ int w = 0;
+ int max_w = w;
+ float theta_thres = 0.1;
+ double const PI = 3.1415926535;
+ for (d = 0;d < IMAGE_DIAGONAL;d++)
+ {
+	 for (k = 0;k < thta;k++)
+	 {
+		 if (H[d][k] > thres)
+		 {
+			 int max = H[d][k];
+
+			 for (l = -4;l < 4;l++)
+			 {
+				 for (m = -4;m < 4;m++)
+				 {
+					 if (d + l >= 0 && d + l < IMAGE_DIAGONAL && k + m >= 0 && k + m < 180)
+					 {
+						 if (H[d + l][k + m] > max)
+							 max = H[d + l][k + m];
+					 }
+				 }
+			 }
+
+			 if (max > H[d][k]) continue;
+			 {
+				 for (j = 0;j < nW;j++)
+				 {
+					 i = (int)((d - j * LUT_SIN[k]) / LUT_COS[k]);
+
+					 if (i < nH && i > 0)
+					 {
+						 if (inputImage[i][j] > thrhold)
+							 w++;
+						 else
+						 {
+							 if (w > max_w)
+								 max_w = w;
+							 w = 0;
+						 }
+					 }
+				 }
+				 if (max_w > line_thrhold)
+				 {
+					 for (j = 0;j < nW;j++)
+					 {
+						 i = (int)((d - j * LUT_SIN[k]) / LUT_COS[k]);
+
+						 if (i < nH && i >= 0)
+						 {
+							 outImage[i][j] += 1;
+						 }
+					 }
+				 }
+			 }
+			 {
+				 w = 0;
+				 max_w = w;
+				 for (i = 0;i < nH;i++)
+				 {
+					 j = (int)((d - i * LUT_COS[k]) / LUT_SIN[k]);
+
+					 if (j < nW && j > 0)
+					 {
+						 if (inputImage[i][j] > thrhold)
+							 w++;
+						 else
+						 {
+							 if (w > max_w)
+								 max_w = w;
+							 w = 0;
+						 }
+					 }
+				 }
+				 if (max_w > line_thrhold)
+				 {
+					 for (i = 0;i < nH;i++)
+					 {
+						 j = (int)((d - i * LUT_COS[k]) / LUT_SIN[k]);
+
+						 if (j < nW && j >= 0)
+						 {
+							 //if(inputImage[i][j] > SHARP_THRESHOLD)
+							 outImage[i][j] += 1;
+
+						 }
+
+					 }
+				 }
+			 }
+		 }
+	 }
+ }
+ delete[]LUT_COS;
+ delete[]LUT_SIN;
+ delete[]LUT_COT;
+ delete[]LUT_SEC;
+}
+```
+
+* result
+
+![image](https://user-images.githubusercontent.com/26988563/162659357-7c40720f-c365-4616-8d9c-4434c0b9ca05.png)
+
+![image](https://user-images.githubusercontent.com/26988563/162659359-877cf3d2-680b-4ffc-b7e2-8369d00e30ef.png)
+
+![image](https://user-images.githubusercontent.com/26988563/162659370-3eb8458c-f73b-4bbf-b746-baeef114391e.png)
+
+임계값을 300으로 주었을 때 자체제작 코드의 결과 창들이다.
+
+자체제작코드와 opencv함수를 사용했을 때의 차이는 임계값을 같게 했을 때의 차이는 없었다. 사실 실행시간에도 별 차이가 없었고 다만 opencv에서의 함수를 풀어서 직접 작성하다보니 코드가 길어진 것에 대해 차이가 있었다고 생각한다.
 
 
 
