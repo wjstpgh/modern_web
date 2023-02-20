@@ -1,9 +1,0 @@
-﻿  main.cpp
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(38): warning C4244: '초기화 중': 'double'에서 'uchar'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(85): warning C4244: '=': 'float'에서 'uchar'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(116): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(117): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(123): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\opencv2_project\histogram_smoothing\histogram_smoothing\main.cpp(124): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Histogram_Smoothing.vcxproj -> C:\Users\admin\Desktop\Opencv2_Project\Histogram_Smoothing\x64\Debug\Histogram_Smoothing.exe
-  Histogram_Smoothing.vcxproj -> C:\Users\admin\Desktop\Opencv2_Project\Histogram_Smoothing\x64\Debug\Histogram_Smoothing.pdb (Full PDB)
