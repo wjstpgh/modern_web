@@ -8,35 +8,33 @@ body {
   font-family: "Spoqa Han Sans Neo", "Sans-serif";
 }
 
+/* a 링크 태그 스타일 초기화 */
 a {
   all: unset;
 }
-
 a:link {
   text-decoration: none;
   color: #3f464d;
 }
-
 a:visited {
   text-decoration: none;
   color: #3f464d;
 }
-
 a:active {
   text-decoration: none;
   color: #3f464d;
 }
-
 a:hover {
   text-decoration: none;
   color: #3f464d;
 }
 
 .inner {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 2rem;
+  width: 100%; /* 가로 사이즈가 1200px 넘는 해상도에서는 max-width 설정 */
+  height: 100%; /* align-items 등으로 수직 가운데 정렬을 위해, 알맞은 height 설정이 필요함 */
+  margin: 0 auto; /* 가운데 정렬: 동일 요소에 width 가 설정되어 있을 때에만 적용 */
+  padding: 0rem 2rem; /* 좌우 padding 을 살짝 주어서, 좌우에 딱 붙지 않도록 함 */
+  overflow: hidden; /* 넘치는 영역에 대해서는 표시안되도록 작성해야 함 */
 }
 
 header {
@@ -51,15 +49,15 @@ header {
 
 .head-container {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* 필요시 세부 설정을 위해, 상단 좌측 브랜드만을 별도로 클래스로 정의 */
 .head-container .head-brand {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .head-container .head-brand a:hover {
@@ -67,9 +65,10 @@ header {
   cursor: pointer;
 }
 
+/* 필요시 세부 설정을 위해, 상단 우측 메뉴만을 별도로 클래스로 정의 */
 .head-container .head-blog {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .head-container .head-blog a:hover {
@@ -84,21 +83,22 @@ section {
 }
 
 .main {
-  height: 360px;
-  background-image: url("http://placekitten.com/400/200");
+  height: 360px; /* 화면 이미지 고정 */
+  background-image: url("https://www.fun-coding.org/assets_lms/images/photodune-4161018-group-of-students-m.jpg");
   background-size: cover;
-  background-position: center 10%;
+  background-position: center 10%; /* 이미지 위치를 살짝 위로 올리기 위한 position 설정 */
   background-repeat: no-repeat;
   z-index: 1;
 }
 
+/* 배경 이미지에 색상을 어둡게 하기 위해, 어두운 색상으로 이미지 상위에 투명도를 주어 덮어씌움 */
 .main-container {
   width: 100%;
   height: 100%;
-  background-color: rgb(47,48,89);
-  opacity: .8;
+  background-color: rgb(47, 48, 89);
+  opacity: 0.8;
   z-index: 2;
-  margin-top: 60px;
+  margin-top: 60px; /* position 이 fixed 일 경우, 문서 흐름에서 빠지므로, 이 부분은 margin 으로 적용 */
 }
 
 .title-container {
@@ -110,7 +110,7 @@ section {
   font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
-  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
 }
 
 .message {
@@ -120,45 +120,23 @@ section {
   line-height: 2rem;
 }
 
-.skill-container {
+.skill-box {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 0.5em 1em 1em 1em;
 }
 
 .skill {
   width: 25%;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  border-radius: 9px;
-  padding: 0.5rem 1rem;
-  margin: 0 1rem;
+  background-color: white;
   box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, 0.2);
-}
-
-.skill-icon {
-  font-size: 2.5rem;
-  margin: 0 10px;
-}
-
-.skill-title {
   display: flex;
-  flex-direction: column;
-  align-content: center;
-}
-
-.skill-name {
-  font-weight: bold;
-  color: #545e6f;
-  margin-bottom: 0.2rem;
-}
-
-.skill-usage {
-  font-size: 0.9rem;
-  color: #545e6f;
+  align-items: stretch;
+  border-radius: 9px;
+  padding: 0.5em 1em;
+  margin: 0 1em;
 }
 
 .python-style {
@@ -177,14 +155,195 @@ section {
   color: #2e7d32;
 }
 
-@media only screen and (min-width:1200px) {
+.skill-icon {
+  font-size: 2.5rem;
+}
+
+.skill-title {
+  margin: 0 1em;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  color: #0d47a1;
+}
+
+.maintitle {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  color: #545e6f;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #545e6f;
+  line-height: 1.4em;
+}
+
+.section-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 2rem;
+}
+
+.section-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+}
+
+.roadmap-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #545e6f;
+}
+
+.arrow-container {
+  display: flex;
+}
+
+.slide-prev {
+  font-size: 2em;
+  cursor: pointer;
+  color: rgb(47, 48, 89);
+  margin: 0;
+}
+
+.slide-next {
+  font-size: 2em;
+  cursor: pointer;
+  color: #cfd8dc;
+  margin: 0;
+}
+
+.class-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  overflow: none; /* overflow 를 hidden 으로 설정하면, transform 시 이미지 짤림 */
+  margin-top: 0;
+}
+
+.class-card {
+  width: 240px;
+  min-width: 240px;
+  box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, 0.2);
+  transition: 0.3s;
+  border-radius: 8px;
+  margin: 10px 10px;
+  touch-action: pan-x;
+}
+
+.class-card:hover {
+  box-shadow: -20px 20px 28px -10px rgba(25, 42, 70, 0.13);
+}
+
+.class-container {
+  padding: 0.5em 1em 1em 1em;
+}
+
+.class-container-skill {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin: 0 0 1em 0;
+}
+
+.class-container-skill-text {
+  font-size: 0.9em;
+  color: #949393;
+  padding: 0.2em 0;
+}
+
+.class-container-skill-level {
+  font-size: 0.9em;
+  color: white;
+  background-color: #0d47a1;
+  padding: 0.2em;
+}
+
+img {
+  border-radius: 8px 8px 0 0;
+  height: 150px;
+}
+
+.class-maintitle {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #545e6f;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden; /* "visible" 외의 값으로 설정 */
+  text-overflow: ellipsis;
+}
+
+.class-subtitle {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #545e6f;
+  line-height: 1.5em;
+  word-wrap: break-word;
+  word-break: keep-all;
+}
+
+.roadmap-desc {
+  display: visible;
+}
+
+@media only screen and (min-width: 1200px) {
   .inner {
     max-width: 1200px;
   }
 }
 
 @media only screen and (max-width: 980px) {
-  .skill-container {
+  .skill-box {
+    display: none !important;
+  }
+  .roadmap-desc {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .head-container .head-brand {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .head-container .head-blog {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 0.8rem;
+  }
+  .message {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #ffffff;
+    line-height: 2rem;
+  }
+  .skill {
+    padding: 0em 1em;
+  }
+  .skill-title {
+    margin: 0 1em;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    color: #0d47a1;
+  }
+  .skill-box {
+    display: none !important;
   }
 }
