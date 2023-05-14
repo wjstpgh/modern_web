@@ -12,18 +12,22 @@ body {
 a {
   all: unset;
 }
+
 a:link {
   text-decoration: none;
   color: #3f464d;
 }
+
 a:visited {
   text-decoration: none;
   color: #3f464d;
 }
+
 a:active {
   text-decoration: none;
   color: #3f464d;
 }
+
 a:hover {
   text-decoration: none;
   color: #3f464d;
@@ -34,13 +38,13 @@ a:hover {
   height: 100%; /* align-items 등으로 수직 가운데 정렬을 위해, 알맞은 height 설정이 필요함 */
   margin: 0 auto; /* 가운데 정렬: 동일 요소에 width 가 설정되어 있을 때에만 적용 */
   padding: 0rem 2rem; /* 좌우 padding 을 살짝 주어서, 좌우에 딱 붙지 않도록 함 */
-  overflow: hidden; /* 넘치는 영역에 대해서는 표시안되도록 작성해야 함 */
+  overflow: hidden;
 }
 
 header {
   width: 100%;
   height: 60px;
-  background-color: #ffffff;
+  background-color: #fff;
   position: fixed;
   top: 0;
   left: 0;
@@ -49,6 +53,7 @@ header {
 
 .head-container {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +62,7 @@ header {
 /* 필요시 세부 설정을 위해, 상단 좌측 브랜드만을 별도로 클래스로 정의 */
 .head-container .head-brand {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .head-container .head-brand a:hover {
@@ -68,7 +73,7 @@ header {
 /* 필요시 세부 설정을 위해, 상단 우측 메뉴만을 별도로 클래스로 정의 */
 .head-container .head-blog {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .head-container .head-blog a:hover {
@@ -78,7 +83,7 @@ header {
 
 section {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fff;
   position: relative;
 }
 
@@ -109,34 +114,65 @@ section {
 .title {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffffff;
-  padding-bottom: 0.8rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
 }
 
 .message {
   font-size: 1.4rem;
   font-weight: normal;
-  color: #ffffff;
+  color: #fff;
   line-height: 2rem;
 }
 
-.skill-box {
+.skill-container {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0.5em 1em 1em 1em;
+  padding: 1rem 0;
 }
 
 .skill {
   width: 25%;
-  background-color: white;
-  box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, 0.2);
+  background-color: #fff;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   border-radius: 9px;
-  padding: 0.5em 1em;
-  margin: 0 1em;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  /* box-shadow: 블럭에 그림자를 적용하는 CSS 기능
+     https://developer.mozilla.org/ko/docs/Web/CSS/box-shadow 
+     offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, 0.2);
+  transition: 0.4s;
+}
+
+.skill:hover {
+  transform: translate(0, -5px);
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  margin: 0 10px;
+}
+
+.skill-title {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.skill-name {
+  font-weight: bold;
+  color: #545e6f;
+  margin-bottom: 0.2rem;
+}
+
+.skill-usage {
+  font-size: 0.9rem;
+  color: #545e6f;
 }
 
 .python-style {
@@ -155,45 +191,16 @@ section {
   color: #2e7d32;
 }
 
-.skill-icon {
-  font-size: 2.5rem;
-}
-
-.skill-title {
-  margin: 0 1em;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  color: #0d47a1;
-}
-
-.maintitle {
-  font-weight: bold;
-  margin-bottom: 0.2em;
-  color: #545e6f;
-}
-
-.subtitle {
-  font-size: 0.9rem;
-  margin: 0;
-  color: #545e6f;
-  line-height: 1.4em;
-}
-
-.section-container {
+.roadmap-container {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
   margin-top: 2rem;
 }
 
-.section-title-container {
+.roadmap-title-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  margin: 0;
+  align-items: center;
 }
 
 .roadmap-title {
@@ -202,97 +209,104 @@ section {
   color: #545e6f;
 }
 
-.arrow-container {
-  display: flex;
-}
-
 .slide-prev {
-  font-size: 2em;
+  font-size: 2rem;
   cursor: pointer;
   color: rgb(47, 48, 89);
-  margin: 0;
 }
 
 .slide-next {
-  font-size: 2em;
+  font-size: 2rem;
   cursor: pointer;
   color: #cfd8dc;
-  margin: 0;
+}
+
+.arrow-container {
+  display: flex;
 }
 
 .class-list {
   display: flex;
   list-style: none;
-  padding: 0;
-  overflow: none; /* overflow 를 hidden 으로 설정하면, transform 시 이미지 짤림 */
-  margin-top: 0;
+  padding: 1rem 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .class-card {
   width: 240px;
-  min-width: 240px;
+  /* box-shadow: 블럭에 그림자를 적용하는 CSS 기능
+     https://developer.mozilla.org/ko/docs/Web/CSS/box-shadow 
+     offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, 0.2);
-  transition: 0.3s;
   border-radius: 8px;
-  margin: 10px 10px;
-  touch-action: pan-x;
+  margin: 0 10px;
+  transition: 0.4s;
 }
 
 .class-card:hover {
-  box-shadow: -20px 20px 28px -10px rgba(25, 42, 70, 0.13);
+  box-shadow: 10px 10px 10px 0px rgba(25, 42, 70, 0.2);
+  transform: translate(0, -5px);
 }
 
-.class-container {
-  padding: 0.5em 1em 1em 1em;
-}
-
-.class-container-skill {
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  margin: 0 0 1em 0;
-}
-
-.class-container-skill-text {
-  font-size: 0.9em;
-  color: #949393;
-  padding: 0.2em 0;
-}
-
-.class-container-skill-level {
-  font-size: 0.9em;
-  color: white;
-  background-color: #0d47a1;
-  padding: 0.2em;
-}
-
-img {
+.class-image {
+  width: 240px;
+  /* border-radius: 블럭 모서리를 둥글게 하는 CSS 기능
+     top-left | top-right | bottom-right | bottom-left */
   border-radius: 8px 8px 0 0;
   height: 150px;
 }
 
-.class-maintitle {
+.class-container {
+  width: 100%;
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.class-skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.class-type {
+  font-size: 0.9rem;
+  color: #949393;
+}
+
+.class-format {
+  font-size: 0.9rem;
+  color: #fff;
+  background-color: #0d47a1;
+  padding: 0.2rem;
+}
+
+.class-desc {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.class-title {
   font-weight: bold;
-  margin-bottom: 0.5em;
   color: #545e6f;
   width: 100%;
   white-space: nowrap;
-  overflow: hidden; /* "visible" 외의 값으로 설정 */
+  overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 0.5rem;
 }
 
-.class-subtitle {
+.class-detail {
   font-size: 0.9rem;
-  margin: 0;
   color: #545e6f;
-  line-height: 1.5em;
-  word-wrap: break-word;
-  word-break: keep-all;
+  line-height: 1.5rem;
 }
 
 .roadmap-desc {
   display: visible;
+}
+
+li a:hover {
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -302,48 +316,10 @@ img {
 }
 
 @media only screen and (max-width: 980px) {
-  .skill-box {
-    display: none !important;
+  .skill-container {
+    display: none;
   }
   .roadmap-desc {
     display: none;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .head-container .head-brand {
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-
-  .head-container .head-blog {
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-
-  .title {
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #ffffff;
-    padding-bottom: 0.8rem;
-  }
-  .message {
-    font-size: 1.3rem;
-    font-weight: normal;
-    color: #ffffff;
-    line-height: 2rem;
-  }
-  .skill {
-    padding: 0em 1em;
-  }
-  .skill-title {
-    margin: 0 1em;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    color: #0d47a1;
-  }
-  .skill-box {
-    display: none !important;
   }
 }
