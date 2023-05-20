@@ -221,6 +221,16 @@ section {
   color: #cfd8dc;
 }
 
+.slide-prev-hover:hover {
+  transition: transform 0.5s;
+  transform: translateX(-2px);
+}
+
+.slide-next-hover:hover {
+  transition: transform 0.5s;
+  transform: translateX(2px);
+}
+
 .arrow-container {
   display: flex;
 }
@@ -230,7 +240,7 @@ section {
   list-style: none;
   padding: 1rem 0;
   margin: 0;
-  overflow: hidden;
+  overflow: none; /* overflow 를 hidden 으로 설정하면, transform 시 이미지 짤림 */
 }
 
 .class-card {
