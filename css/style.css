@@ -125,6 +125,12 @@ section {
   line-height: 2rem;
 }
 
+.news {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff6ae;
+}
+
 .skill-container {
   width: 100%;
   height: 100%;
